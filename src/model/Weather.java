@@ -17,8 +17,6 @@ public class Weather {
 	
 	private String briefDescription;
 	private String longDescription;
-	private String lat;
-	private String lon;
 	private String city;
 	public boolean validRequest;
 	
@@ -93,13 +91,6 @@ public class Weather {
 				Object object = jsonParser.parse(response.toString());
 
 				JSONObject jsonObject = (JSONObject) object;
-
-				// System.out.println(jsonObject);
-
-				JSONObject coordinates = (JSONObject)jsonObject.get("coord");
-				String latitude = coordinates.get("lon").toString();
-				String longitude = coordinates.get("lat").toString();
-
 				
 				JSONArray weather = (JSONArray)jsonObject.get("weather");
 				
@@ -107,7 +98,6 @@ public class Weather {
 				
 				String weatherDescription = weatherDetail.get("description").toString();
 
-				
 				JSONObject temperatureInfo = (JSONObject)jsonObject.get("main");
 		
 				Double currentTemp = (double) Math.round(Double.parseDouble(temperatureInfo.get("temp").toString()) - 273);
@@ -124,8 +114,6 @@ public class Weather {
 				this.temp = currentTemperature;
 				this.briefDescription = mainWeather;
 				this.longDescription = weatherDescription;
-				this.lat = latitude;
-				this.lon = longitude;
 				this.minTemp = minTemp;
 				this.maxTemp = maxTemp;
 		
